@@ -1,0 +1,79 @@
+and this is my module main file 
+```php
+use PrestaShop\Module\Sleek\SleekOrm\SleekOrm;
+
+
+use PrestaShop\PrestaShop\Adapter\Entity\Configuration;
+use PrestaShop\PrestaShop\Adapter\Entity\Language;
+use \PrestaShop\PrestaShop\Adapter\Entity\Module;
+use PrestaShop\PrestaShop\Adapter\Entity\Tab;
+
+class Sleek extends Module {
+
+    private SleekOrm $SleekOrm;
+
+    public function __construct(){
+
+        $this->name = 'sleek';
+        $this->tab = 'sleek';
+        $this->version = '1.0.0';
+        $this->author = 'Ragonesi Alessio';
+        $this->need_instance = 0;
+        $this->ps_versions_compliancy = [
+            'min' => '1.7.0.0',
+            'max' => '8.99.99',
+        ];
+        $this->bootstrap = false;
+
+        parent::__construct();
+
+        $this->displayName = $this->l('Sleek');
+        $this->description = $this->l('Create outfits and link products to them');
+
+        $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
+
+        if (!Configuration::get('MYMODULE_NAME')) {
+            $this->warning = $this->l('No name provided');
+        }
+
+        $this->SleekOrm = SleekOrm::getInstance();
+
+    }
+
+
+    public function install(){
+
+        return  parent::install() &&
+                $this->installTab() &&
+                $this->SleekOrm->createTable() &&
+                $this->registerHook('displayFooterProduct');
+
+    }
+
+    public function uninstall(){
+
+
+        return  parent::uninstall() &&
+                
+                $this->uninstallTab() &&
+                $this->SleekOrm->deleteTable();
+            
+                //$this->SleekOrm->deleteTable() && 
+                // && 
+                
+    }
+
+
+    public function hookDisplayFooterProduct(array $params)
+    {
+        //$orm = SleekOrm::getInstance();
+        //return $orm->createTable() . "<br>" . $orm->deleteTable();
+
+        //$this->SleekOrm->createTable();
+        return "hewll";
+    }
+
+
+   
+}```
+ignore un/installTab i had to cut those functions to upload the message

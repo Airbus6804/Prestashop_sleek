@@ -1,0 +1,16 @@
+{
+    "name": "alessio/sleek",
+    "description": "Create outfits and link products to them",
+    "autoload": {
+        "psr-4": {
+            "PrestaShop\\Module\\Sleek\\SleekOrm\\": "src/Entities/SleekOrm",
+            "PrestaShop\\Module\\Sleek\\SleekImageUploadService\\": "src/Services/SleekImageUploadService"
+
+        }
+
+    },
+    "config": {
+        "prepend-autoloader": false
+    },
+    "type": "prestashop-module"
+}
